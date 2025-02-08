@@ -9,7 +9,7 @@ public interface CandidateRepository {
 
     Candidate save(Candidate candidate);
 
-    Candidate deleteById(int id);
+    boolean deleteById(int id);
 
     boolean update(Candidate candidate);
 
