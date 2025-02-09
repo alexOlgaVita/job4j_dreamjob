@@ -15,15 +15,19 @@ public class Candidate {
 
     private int cityId;
 
+    private int fileId;
+
     public Candidate() {
     }
 
-    public Candidate(int id, String title, String description, LocalDateTime creationDate, int cityId) {
+    public Candidate(int id, String title, String description, LocalDateTime creationDate,
+                     int cityId, int fileId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
         this.cityId = cityId;
+        this.fileId = fileId;
     }
 
     public int getId() {
@@ -50,6 +54,10 @@ public class Candidate {
         return cityId;
     }
 
+    public int getFileId() {
+        return fileId;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -64,6 +72,10 @@ public class Candidate {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
     }
 
     @Override

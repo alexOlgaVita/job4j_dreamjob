@@ -6,9 +6,9 @@ import ru.job4j.dreamjob.model.Candidate;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
@@ -17,27 +17,27 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(1);
 
-    private final Map<Integer, Candidate> candidates = new HashMap<>();
+    private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
         save(new Candidate(0, "Петров Иван Васильевич",
                 "Имеет опыт разработки в C++ более 10 лет, Java 2 года",
-                LocalDateTime.of(2025, 1, 9, 12, 30, 59), 1));
+                LocalDateTime.of(2025, 1, 9, 12, 30, 59), 1, 1));
         save(new Candidate(0, "Быкова Мария Игоревна",
                 "Java-разработчик, 3 года в биллинговой компании",
-                LocalDateTime.of(2025, 1, 25, 13, 10, 25), 1));
+                LocalDateTime.of(2025, 1, 25, 13, 10, 25), 1, 1));
         save(new Candidate(0, "Васильчиков Тарас Сергеевич",
                 "Начинающий разработки на Java",
-                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 2));
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 2, 1));
         save(new Candidate(0, "Огонькова Любовь Ивановна",
                 "Опыта работы в банке Java-разработчиком более 4 лет",
-                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 3));
+                LocalDateTime.of(2025, 1, 12, 10, 15, 5), 3, 1));
         save(new Candidate(0, "Кукушкин Николай Константинович",
                 "Java-разработчик более 7 лет",
-                LocalDateTime.of(2025, 2, 2, 11, 25, 17), 3));
+                LocalDateTime.of(2025, 2, 2, 11, 25, 17), 3, 1));
         save(new Candidate(0, "Круглова Анна Алексеевна",
                 "Разработчик на Java более 2 лет, Pyhton более 3 лет",
-                LocalDateTime.of(2025, 2, 6, 1, 32, 56), 2));
+                LocalDateTime.of(2025, 2, 6, 1, 32, 56), 2, 1));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MemoryCandidateRepository implements CandidateRepository {
         return candidates.computeIfPresent(candidate.getId(),
                 (id, oldVacancy) -> new Candidate(oldVacancy.getId(), candidate.getTitle(),
                         candidate.getDescription(), candidate.getCreationDate(),
-                        candidate.getCityId())) != null;
+                        candidate.getCityId(), candidate.getFileId())) != null;
     }
 
     @Override

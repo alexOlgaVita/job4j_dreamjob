@@ -1,17 +1,16 @@
 package ru.job4j.dreamjob.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.City;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class MemoryCityRepository implements CityRepository {
 
-    private final Map<Integer, City> cities = new HashMap<>() {
+    private final Map<Integer, City> cities = new ConcurrentHashMap<>() {
         {
             put(1, new City(1, "Москва"));
             put(2, new City(2, "Санкт-Петербург"));
