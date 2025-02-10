@@ -54,8 +54,8 @@ class Sql2oCandidateRepositoryTest {
 
     @AfterEach
     public void clearVacancies() {
-        var vacancies = sql2oCandidateRepository.findAll();
-        for (var candidate : vacancies) {
+        var candidates = sql2oCandidateRepository.findAll();
+        for (var candidate : candidates) {
             sql2oCandidateRepository.deleteById(candidate.getId());
         }
     }
