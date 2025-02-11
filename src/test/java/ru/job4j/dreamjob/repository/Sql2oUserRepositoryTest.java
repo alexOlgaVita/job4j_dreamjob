@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sql2o.Sql2oException;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
 
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Sql2oUserRepositoryTest {
@@ -95,9 +93,8 @@ class Sql2oUserRepositoryTest {
         assertThat(savedUser1).usingRecursiveComparison().isEqualTo(user1.get());
         var email2 = EMAIL_PASS.get(1).keySet().toArray()[0];
         var pass2 = EMAIL_PASS.get(1).get(email2);
-        assertThatThrownBy(() -> sql2oUserRepository.save(new User(1, email2.toString(), "Ильина Ольга", pass2)))
-                .isInstanceOf(Sql2oException.class)
-                .hasMessageContaining("Error in executeUpdate, Unique index or primary key violation");
+        var user2 = sql2oUserRepository.save(new User(0, email2.toString(), "Ильина Ольга", pass2));
         assertThat(savedUser1).usingRecursiveComparison().isEqualTo(user1.get());
+        assertThat(user2).isEmpty();
     }
 }
