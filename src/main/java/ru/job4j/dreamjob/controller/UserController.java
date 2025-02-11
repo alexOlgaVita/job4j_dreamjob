@@ -21,13 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String getCreationPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+    public String getCreationPage() {
         return "users/register";
     }
 
@@ -42,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/register/{email}/{password}")
-    public String getUserByEmaillPass(Model model, @PathVariable String email, @PathVariable String password) {
+    public String getUserByEmailPass(Model model, @PathVariable String email, @PathVariable String password) {
         var userOptional = userService.findByEmailAndPassword(email, password);
         if (userOptional.isEmpty()) {
             model.addAttribute("message", "Пользователь с указанными email и password не найден");
@@ -53,13 +47,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String getLoginPage(Model model, HttpSession session) {
-        var user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setName("Гость");
-        }
-        model.addAttribute("user", user);
+    public String getLoginPage() {
         return "users/login";
     }
 
