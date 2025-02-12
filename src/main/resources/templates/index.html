@@ -3,41 +3,10 @@
 <head th:include="fragments/header :: header"></head>
 <body>
 <div th:replace="fragments/navigation :: navigation"></div>
-<h3>Проект job4j_dreamjob, выполняемый в рамках курса Job4j</h3>
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<h3>Проект "Работа мечты"</h3>
+<h6>"Ты знаешь - все в твоих руках,... и даже я" (слова из песни ))</h6>
+<br>
+<img th:src="@{images/job.jpg}" alt="Работа тебя ищет">
 <footer th:include="fragments/footer :: footer"></footer>
 </body>
 </html>
